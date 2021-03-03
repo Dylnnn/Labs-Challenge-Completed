@@ -1,8 +1,8 @@
 import './App.css';
 import { connect } from 'react-redux'; 
-import NavBar from "./componentes/NavBar/index"
-import Search from "./componentes/NavBar/search"
-import Catalog from "./componentes/ProductCard/index"
+import NavBar from "./componentes/navBar/index"
+import Search from "./componentes/navBar/search"
+import Catalog from "./componentes/catalog/index"
 import { Route } from 'react-router-dom';
 
 
