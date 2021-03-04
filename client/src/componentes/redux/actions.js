@@ -6,13 +6,23 @@ export const SETSTRING = "SETSTRING"
 export const NEWCONDITION = "NEWCONDITION"
 export const USEDCONDITION = "USEDCONDITION"
 export const MODIFYRESULTS = "MODIFYRESULTS"
-
-export const setSearch = (query) => {
-    return function (dispatch) {
-        axios.post(`http://localhost:3001/mercadolibre/api/search?q=${query}`)
-            .then((response) => dispatch({ type: SETSEARCH, payload: response.data }))
-            .catch((error) => console.log(error));
+    let results = {}
+export const setSearch = (query) => async (dispatch) => {
+    const queryString = query
+    
+    console.log(results)
+    if (!results[`${queryString}`]) {
+        const response = await axios.post(`http://localhost:3001/mercadolibre/api/search?q=${query}`)
+        results[`${queryString}`] = await response.data
+        dispatch({ type: SETSEARCH, payload: response.data })
+        console.log(results[`${queryString}`])
+        
     }
+    else {
+        console.log("ultimo cs", results[`${queryString}`])
+        dispatch({ type: SETSEARCH, payload: results[`${queryString}`] })
+    }
+
 }
 
 export const maxPrice = () => {
